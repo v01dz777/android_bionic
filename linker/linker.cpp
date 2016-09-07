@@ -1735,6 +1735,7 @@ static void for_each_dt_needed(const soinfo* si, F action) {
       action(fix_dt_needed(si->get_string(d->d_un.d_val), si->get_realpath()));
     }
   }
+  for_each_matching_shim(si->get_realpath(), action);
 }
 
 template<typename F>
@@ -1745,6 +1746,7 @@ static void for_each_dt_needed(const ElfReader& elf_reader, F action) {
       action(fix_dt_needed(elf_reader.get_string(d->d_un.d_val), elf_reader.name()));
     }
   }
+  for_each_matching_shim(elf_reader.name(), action);
 }
 
 static bool load_library(android_namespace_t* ns,
